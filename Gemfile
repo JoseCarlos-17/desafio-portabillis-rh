@@ -13,6 +13,7 @@ gem "puma", ">= 5.0"
 gem 'pagy', '~> 6.5'
 gem 'dotenv-rails', '~> 3.1', '>= 3.1.5'
 gem 'rack-cors', '~> 2.0'
+gem 'active_model_serializers', '~> 0.10.13'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
