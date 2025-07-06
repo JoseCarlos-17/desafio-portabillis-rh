@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_05_202933) do
     t.integer "access_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "active"
+    t.boolean "active", default: true
   end
 
 end
