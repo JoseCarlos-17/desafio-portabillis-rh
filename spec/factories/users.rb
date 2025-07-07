@@ -3,5 +3,6 @@ FactoryBot.define do
     name { "MyString" }
     email { "MyString" }
     access_level { 1 }
+    active { true }
   end
 end

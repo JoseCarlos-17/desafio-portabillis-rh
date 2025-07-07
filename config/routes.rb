@@ -17,6 +17,14 @@ Rails.application.routes.draw do
   namespace :clients do
   end
 
+  namespace :webhooks do
+    namespace :rh do
+      resources :users, only: [:create] do
+        put "/inactivate", on: :member, to: "users#inactivate"
+      end
+    end
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
