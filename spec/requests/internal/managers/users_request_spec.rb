@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Internal::Manager::UsersController", type: :request do
+  let!(:manager) { create(:user, access_level: "manager") }
+
   describe 'GET#index' do
     context 'when clients are listed' do
       let!(:clients) {
@@ -8,7 +10,7 @@ RSpec.describe "Internal::Manager::UsersController", type: :request do
       }
 
       before do
-        get '/internal/manager/users'
+        get '/internal/manager/users', headers: get_headers(manager)
       end
 
       it 'must to return 200 status code' do
@@ -26,7 +28,7 @@ RSpec.describe "Internal::Manager::UsersController", type: :request do
       let(:client) { create(:user, access_level: 'client') }
 
       before do
-        get "/internal/manager/users/#{client.id}"
+        get "/internal/manager/users/#{client.id}", headers: get_headers(manager)
       end
 
       it 'must to return 200 status code' do
@@ -44,7 +46,7 @@ RSpec.describe "Internal::Manager::UsersController", type: :request do
       let!(:client) { create(:user, access_level: 'client') }
 
       before do
-        delete "/internal/manager/users/#{client.id}"
+        delete "/internal/manager/users/#{client.id}", headers: get_headers(manager)
       end
 
       it 'must return 204 status code' do
@@ -62,7 +64,7 @@ RSpec.describe "Internal::Manager::UsersController", type: :request do
       let!(:client) { create(:user, access_level: 'client') }
 
       before do
-        put "/internal/manager/users/#{client.id}/inactivate"
+        put "/internal/manager/users/#{client.id}/inactivate", headers: get_headers(manager)
       end
 
       it 'must return 204 status code' do
