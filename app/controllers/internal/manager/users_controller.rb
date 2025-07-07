@@ -1,4 +1,6 @@
 class Internal::Manager::UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     clients = User.where(access_level: 'client').all
 
