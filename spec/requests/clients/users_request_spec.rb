@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Client::UsersController", type: :request do
+RSpec.describe "Clients::UsersController", type: :request do
   describe 'GET#show' do
     context 'when a client is selected by manager' do
       let!(:client) { create(:user, access_level: "client") }
@@ -39,7 +39,7 @@ RSpec.describe "Client::UsersController", type: :request do
       end
 
       it 'must update the client attributes' do
-        expect(User.last.name).to eq('John Doe')
+        expect(User.last.name).to eq('John doe')
       end
     end
   end
