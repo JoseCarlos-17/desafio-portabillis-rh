@@ -3,7 +3,7 @@ class Internal::Manager::UsersController < ApplicationController
   before_action :verify_is_manager
 
   def index
-    clients = User.where(access_level: 'client').all
+    clients = UserFiltersQuery.new(params).call
 
     render json: clients,
            each_serializer: Internal::Manager::Index::UsersSerializer,
