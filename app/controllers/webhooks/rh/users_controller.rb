@@ -1,6 +1,6 @@
 class Webhooks::Rh::UsersController < ApplicationController
   def create
-    client = User.create!(client_params)
+    client = User.create!(client_params.merge!(access_level: 'client'))
 
     render json: client,
            serializer: Webhooks::Rh::Create::UserSerializer,
@@ -18,7 +18,7 @@ class Webhooks::Rh::UsersController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:name, :email)
-                           .merge!(access_level: 'client')
+    params.require(:client).permit(:name, :email,
+                                   :password, :password_confirmation)
   end
 end

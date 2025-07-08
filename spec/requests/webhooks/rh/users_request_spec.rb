@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "Webhooks::Rh::UsersControlelr", type: :request do
+RSpec.describe "Webhooks::Rh::UsersController", type: :request do
   describe 'POST#create' do
     context 'when the rh register the client' do
       let(:client_attributes) { attributes_for(:user,  name: 'John doe',
-        email: 'johndoe@gmail.com') }
+        email: 'johndoe@gmail.com', password: "123123123",
+        password_confirmation: "123123123")
+      }
       
       before do
         post '/webhooks/rh/users', params: { client: client_attributes }
