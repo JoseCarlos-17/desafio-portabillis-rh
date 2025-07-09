@@ -188,5 +188,13 @@ path: "/webhooks/rh/users/:id/inactivate"
 status: 204 NO CONTENT
 
 
+## Considerações finais
+Inicialmente eu pretendia fazer o front-end em Vue.js 3, aplicar a paginação da listagem de clientes,
+fazer a autorização com a gem Pundit, adicionar e configurar o docker, e quem sabe até o postgres,
+mas por falta de tempo, tudo isso foi deixado de lado para que os tópicos obrigatórios fossem concluídos.
+
+Acho que o único diferencial que foi aplicado foi o design pattern "Query Object".
+
+
 
   
