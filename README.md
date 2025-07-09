@@ -79,7 +79,7 @@ que você pode passar na listagem para filtrar usuários são:
           {
             "id": 2,
             "name": "José da Silva",
-            "email": "josé@email.com"
+            "email": "jose@email.com"
           }
         ]
     ```
