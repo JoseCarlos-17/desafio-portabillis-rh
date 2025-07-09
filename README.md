@@ -33,11 +33,12 @@ Este projeto foi desenvolvido para atender ao desafio da Portabillis, criando um
 Clone o repositório e instale as dependências:
 
 ```bash
-git clone <url-do-repo>
-cd nome-do-projeto
-bundle install
-rails db:create db:migrate db:seed
-rails server
+  git clone <url-do-repo>
+  cd nome-do-projeto
+  bundle install
+  rails db:create db:migrate db:seed
+  rails server
+```
 
 ---
 
@@ -49,125 +50,141 @@ rails server
 ## Endpoints para Manager (admin)
 
 ### listar usuários
+path: "/internal/manager/users"
 
-  path: "/internal/manager/users"
-  verbo http: GET
+verbo http: GET
 
-  No endpoint de listagem, você pode passar parâmetros para ativar filtros para buscar usuários. Os parâmetros
-  que você pode passar na listagem para filtrar usuários são:
+No endpoint de listagem, você pode passar parâmetros para ativar filtros para buscar usuários. Os parâmetros
+que você pode passar na listagem para filtrar usuários são:
 
-  - by_name: para filtrar usuários pelo nome
-  - by_email: para filtrar usuários pelo email
-  - order_by: aqui é para você ordenar a lista, passando "name" ou "email" como valor, e a listagem com este
-              ordenador fica em ordem descrescente, do mais recente até o mais antigo.
-  -show_inactive: serve para mostrar os usuários que foram inativados pelo manager.
-                  Ele deve receber o valor booleano "true" para que os usuários inativados sejam filtrados.
+- by_name: para filtrar usuários pelo nome
+- by_email: para filtrar usuários pelo email
+- order_by: aqui é para você ordenar a lista, passando "name" ou "email" como valor, e a listagem com este
+            ordenador fica em ordem descrescente, do mais recente até o mais antigo.
+- show_inactive: serve para mostrar os usuários que foram inativados pelo manager.
+                Ele deve receber o valor booleano "true" para que os usuários inativados sejam filtrados.
 
-### response
+  #### response
   status: 200 OK
- 
-  body:
-  [
-    {
-      "id": 1,
-      "name": "João da Silva",
-      "email": "joao@email.com"
-    },
   
-    {
-      "id": 2,
-      "name": "José da Silva",
-      "email": "josé@email.com"
-    },
-  ]
+    body:
+     ```
+        [
+          {
+            "id": 1,
+            "name": "João da Silva",
+            "email": "joao@email.com"
+          },
+    
+          {
+            "id": 2,
+            "name": "José da Silva",
+            "email": "josé@email.com"
+          }
+        ]
+    ```
 
 ### Visualizar usuário
-
-  path: "/internal/manager/users/:id"
-  verbo http: GET
-
-### response
-  status: 200 OK
-  body:
-    {
-      "id": 1,
-      "name": "João da Silva",
-      "email": "joao@email.com"
-    }
-
-### Deletar usuário
-
 path: "/internal/manager/users/:id"
-verbo http: DELETE
 
-### response
-status: 204 NO CONTENT
+verbo http: GET
 
-### Inativar usuário
-
-path: "/internal/manager/users/:id/inactivate"
-status: 204 NO CONTENT
-
-
-## Endpoints para cliente
-  ### Visualizar usuário
-
-  path: "/clients/users/:id"
-  verbo http: GET
-
-  ### response
-    status: 200 OK
-    body:
+  #### response
+  status: 200 OK
+  
+  body:
+   ```
       {
         "id": 1,
         "name": "João da Silva",
         "email": "joao@email.com"
       }
+   ```
 
-  ### Atualizar usuário
-    path: "/clients/users/:id"
-    verbo http: PUT
+### Deletar usuário
+path: "/internal/manager/users/:id"
 
-    request_body:
-      {
-        "client":  {
+verbo http: DELETE
+
+  #### response
+  status: 204 NO CONTENT
+
+### Inativar usuário
+path: "/internal/manager/users/:id/inactivate"
+
+status: 204 NO CONTENT
+
+## Endpoints para cliente
+  ### Visualizar usuário
+
+  path: "/clients/users/:id"
+
+  verbo http: GET
+
+  #### response
+  status: 200 OK
+  
+  body:
+   ```
+        {
+          "id": 1,
           "name": "João da Silva",
           "email": "joao@email.com"
         }
-      }
+   ```
 
-  ### response
-    status: 204 NO CONTENT
+  ### Atualizar usuário
+  path: "/clients/users/:id"
+
+  verbo http: PUT
+  
+  request_body:
+   ```
+        {
+          "client":  {
+            "name": "João da Silva",
+            "email": "joao@email.com"
+          }
+        }
+   ```
+  #### response
+  status: 204 NO CONTENT
 
 ## Endpoints externos (webhooks)
   ### Cadastrar usuário
-  path: '/webhooks/rh/users'
+  path: "/webhooks/rh/users"
+
   verbo http: POST
-
+  
   request_body:
-       {
-        "client":  {
-          "name": "João da Silva",
-          "email": "joao@email.com"
-          "password": "123123123",
-          "password_confirmation": "123123123",
+   ```
+         {
+          "client":  {
+            "name": "João da Silva",
+            "email": "joao@email.com"
+            "password": "123123123",
+            "password_confirmation": "123123123",
+          }
         }
-      }
+   ```
 
-### response
+  #### response
   status: 201 CREATED
+  
   body:
-    {
-      "id": 1,
-      "name": "João da Silva",
-      "email": "joao@email.com",
-      "access_level": "client"
-    }
-
+   ```
+      {
+        "id": 1,
+        "name": "João da Silva",
+        "email": "joao@email.com",
+        "access_level": "client"
+      }
+   ```
 
 ### Inativar usuário
 
 path: "/webhooks/rh/users/:id/inactivate"
+
 status: 204 NO CONTENT
 
 
